@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 8556d88b7b80cc04699415821d51f660
+guid: 3548cbe29d609a8419842117efc624f9
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Firing Rifle
+    second: Landing
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -27,7 +27,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -36,14 +36,14 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Firing Rifle
+      name: Landing
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 8
+      lastFrame: 32
       wrapMode: 0
-      orientationOffsetY: -54.87
-      level: 0
+      orientationOffsetY: 0
+      level: 0.77
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
