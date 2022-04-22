@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static SceneLoadManager instance;
+    public static SceneLoadManager Instance => instance;
+
+    private void Awake()
     {
-        
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadMainMenu()
     {
-        
+
+    }
+    public void LoadGame()
+    {
+
+    }
+    public void LoadWinScreen()
+    {
+
+    }
+    public void LoadLoseScreen()
+    {
+
     }
 }

@@ -11,26 +11,17 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private Transform spawnLocation;
 
     // muzzle Flash
-    [SerializeField] private GameObject particleVFX;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private ParticleSystem particleVFX;
 
     public void FireWeapon(Transform locationToAim)
     {
-
+        if (particleVFX != null)
+        {
+            particleVFX.Play();
+        }
         Vector3 aimVector = locationToAim.position - spawnLocation.position;
         Vector3 normalizedAimVector = aimVector.normalized;
-        Instantiate(bulletToSpawn, spawnLocation.position, Quaternion.LookRotation(normalizedAimVector, Vector3.up));
-
+        GameObject bullet = Instantiate(bulletToSpawn, spawnLocation.position, Quaternion.LookRotation(normalizedAimVector, Vector3.up));
+        bullet.GetComponent<BulletComponent>().SetPlayer(this.gameObject);
     }
 }

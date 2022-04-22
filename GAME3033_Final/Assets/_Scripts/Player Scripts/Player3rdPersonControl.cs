@@ -123,8 +123,6 @@ public class Player3rdPersonControl : MonoBehaviour
         if (!playerMovement.pause)
         {
             weapon.FireWeapon(aimLocation);
-
-            Debug.Log("Shooting Logic from weapon here");
         }
     }
 }
