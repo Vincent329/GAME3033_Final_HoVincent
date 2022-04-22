@@ -2006,6 +2006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fVerticalJumpForce: 15
   m_fMoveSpeed: 15
+  m_fDashForce: 0
   m_fGroundedRadius: 0.39
   m_moveInput: {x: 0, y: 0, z: 0}
   m_velocityVector: {x: 0, y: 0, z: 0}
@@ -2017,6 +2018,7 @@ MonoBehaviour:
   isActive: 0
   pause: 0
   firing: 0
+  didDash: 0
   isGrounded: 0
 --- !u!114 &4754428710705109345
 MonoBehaviour:
@@ -2146,7 +2148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CinemachineCameraTarget: {fileID: 1960595373}
   m_fAimSensitivity: 5
-  m_fBottomClamp: -30
+  m_fBottomClamp: -70
   m_fTopClamp: 70
   m_fThreshold: 0.016666668
   m_fCameraAngleOverride: 0

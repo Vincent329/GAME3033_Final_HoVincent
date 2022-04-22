@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 698745875990165459}
   - component: {fileID: 3806345324555787886}
   m_Layer: 9
-  m_Name: uploads_files_642062_ARCHERY_Target
+  m_Name: Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +82,10 @@ MonoBehaviour:
   colliderComponent: {fileID: 0}
   pickupTarget: {fileID: 0}
   rb: {fileID: 0}
+  isMovableTarget: 0
+  wayPoints:
+  - {x: 0, y: 0, z: 0}
+  moveSpeed: 0
 --- !u!1 &8459079251077990742
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,11 @@ public class TargetComponent : HealthComponent
     // check if it's a movable target
     [SerializeField] private bool isMovableTarget;
 
+    [SerializeField] private Vector3[] wayPoints;
+    int currentWaypoint = 0;
+    [SerializeField] private float moveSpeed;
+
+
     protected override void Start()
     {
         base.Start();
@@ -20,6 +25,26 @@ public class TargetComponent : HealthComponent
         rb.useGravity = false;
     }
 
+    private void Update()
+    {
+        if (isMovableTarget)
+        {
+            Movement();
+        }
+    }
+
+    public void Movement()
+    {
+        if (Vector3.Distance(transform.position, wayPoints[currentWaypoint]) < 0.25f)
+        {
+            currentWaypoint += 1;
+            currentWaypoint = currentWaypoint % wayPoints.Length;
+        }
+
+        Vector3 directionOfMovement = (wayPoints[currentWaypoint] - transform.position).normalized;
+        rb.MovePosition(transform.position + directionOfMovement * moveSpeed * Time.deltaTime);
+        
+    }
 
     public void TargetTakeDamage(float damage, Transform targetFocus)
     {

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Variables")]
     [SerializeField] private float m_fVerticalJumpForce;
     [SerializeField] private float m_fMoveSpeed;
+    [SerializeField] private float m_fDashForce;
     [SerializeField] private float m_fGroundedRadius;
 
     [Header("Movement Input")]
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isActive = false;
     public bool pause = false;
     public bool firing = false;
+    public bool didDash = false;
     [SerializeField] private bool isGrounded;
 
     // Audio Source
@@ -50,9 +52,7 @@ public class PlayerMovement : MonoBehaviour
         //audioSource = GetComponent<AudioSource>();
         playerAnimController = GetComponent<Animator>();
         isGrounded = false;
-
-   
-
+        didDash = false;
     }
 
     private void Start()
@@ -80,7 +80,9 @@ public class PlayerMovement : MonoBehaviour
         playerInputData.Player.Fire.started += OnFire;
         playerInputData.Player.Fire.canceled += OnFire;
         playerInputData.Player.Jump.started += OnJump;
-        playerInputData.Player.Pause.started -= OnPause;
+        playerInputData.Player.Pause.started += OnPause;
+        playerInputData.Player.Dash.started += OnDash;
+        playerInputData.Player.Dash.canceled += OnDash;
 
     }
 
@@ -101,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
         playerInputData.Player.Fire.canceled -= OnFire;
         playerInputData.Player.Jump.started -= OnJump;
         playerInputData.Player.Pause.started -= OnPause;
+        playerInputData.Player.Dash.started -= OnDash;
+        playerInputData.Player.Dash.canceled -= OnDash;
     }
 
     // Update is called once per frame
@@ -112,6 +116,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = CheckGrounded();
+        if (isGrounded)
+        {
+            didDash = false;
+        }
         playerAnimController.SetBool(isGroundedHash, isGrounded);
         m_velocityVector = (m_moveInput.x * GetCameraRight(playerCamera) + m_moveInput.z * GetCameraForward(playerCamera)) * m_fMoveSpeed * Time.deltaTime;
         //rb.AddForce(m_ForceVector, ForceMode.Impulse);
@@ -164,6 +172,16 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce((Vector3.up * m_fVerticalJumpForce), ForceMode.Impulse);
             playerAnimController.SetTrigger(isJumpingHash);
+        }
+    }
+
+    private void OnDash(InputAction.CallbackContext obj)
+    {
+        if (!isGrounded && !didDash && m_moveInput.magnitude >= 0)
+        {
+            didDash = true;
+            rb.velocity = Vector3.zero;
+            rb.AddForce(m_velocityVector * m_fDashForce + (Vector3.up * 10.0f), ForceMode.Impulse);
         }
     }
 
