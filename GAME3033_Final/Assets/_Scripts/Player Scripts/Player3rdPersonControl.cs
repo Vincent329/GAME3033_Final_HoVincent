@@ -13,7 +13,6 @@ public class Player3rdPersonControl : MonoBehaviour
     [SerializeField] private float m_fThreshold = 1.0f / 60.0f;
     [SerializeField] private float m_fCameraAngleOverride = 0.0f;
     [SerializeField] private LayerMask aimColliderMask;
-
     [SerializeField] private Transform aimLocation;
     public Transform getAimLocation => aimLocation;
 
@@ -24,7 +23,7 @@ public class Player3rdPersonControl : MonoBehaviour
     // cinemachine camera values
     float _cinemachineTargetYaw;
     float _cinemachineTargetPitch;
-    bool isActive = false;
+    bool init = false;
     [SerializeField] private Vector2 m_lookVector;
 
     // reference to attached player movement component
@@ -35,7 +34,7 @@ public class Player3rdPersonControl : MonoBehaviour
     void Start()
     {
         CinemachineCameraTarget.transform.rotation = Quaternion.identity;
-        isActive = true;
+        init = true;
         playerMovement = GetComponent<PlayerMovement>();
         playerMovement.getPlayerInputData.Player.Look.performed += OnLook;
         playerMovement.getPlayerInputData.Player.Look.canceled += OnLook;
@@ -43,8 +42,29 @@ public class Player3rdPersonControl : MonoBehaviour
         playerMovement.getPlayerInputData.Player.Fire.started += FireWeapon;
     }
 
+    private void OnEnable()
+    {
+        if (init)
+        {
+            playerMovement.getPlayerInputData.Player.Look.performed += OnLook;
+            playerMovement.getPlayerInputData.Player.Look.canceled += OnLook;
+
+            playerMovement.getPlayerInputData.Player.Fire.started += FireWeapon;
+        }
+    }
+    private void OnDisable()
+    {
+        if (init)
+        {
+            playerMovement.getPlayerInputData.Player.Look.performed -= OnLook;
+            playerMovement.getPlayerInputData.Player.Look.canceled -= OnLook;
+
+            playerMovement.getPlayerInputData.Player.Fire.started -= FireWeapon;
+        }
+    }
+
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         CameraRotation();
         AimUpdate();
