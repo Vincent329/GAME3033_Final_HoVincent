@@ -85,7 +85,7 @@ public class Player3rdPersonControl : MonoBehaviour
             aimLocation.position = raycastHit.point;
             hitTransform = raycastHit.transform;
         }
-        //// rotate the player rotation based on the look transform
+
         //if (playerMovement.firing)
         //{
         //    if (hitTransform != null)
@@ -102,7 +102,7 @@ public class Player3rdPersonControl : MonoBehaviour
     {
         if (!playerMovement.pause)
         {
-            //weapon.FireWeapon(aimLocation);
+            weapon.FireWeapon(aimLocation);
 
             Debug.Log("Shooting Logic from weapon here");
         }

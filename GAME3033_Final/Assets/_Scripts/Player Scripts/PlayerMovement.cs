@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CheckGrounded();
         playerAnimController.SetBool(isGroundedHash, isGrounded);
-        m_velocityVector += (m_moveInput.x * GetCameraRight(playerCamera) + m_moveInput.z * GetCameraForward(playerCamera)) * m_fMoveSpeed * Time.deltaTime;
+        m_velocityVector = (m_moveInput.x * GetCameraRight(playerCamera) + m_moveInput.z * GetCameraForward(playerCamera)) * m_fMoveSpeed * Time.deltaTime;
         //rb.AddForce(m_ForceVector, ForceMode.Impulse);
         rb.MovePosition(rb.position + m_velocityVector * m_fMoveSpeed * Time.deltaTime);
         m_velocityVector = Vector3.zero;

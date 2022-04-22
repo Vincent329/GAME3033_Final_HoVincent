@@ -29,15 +29,17 @@ public class HealthUI : MonoBehaviour
     private void OnHealthInitialized(HealthComponent healthComponent)
     {
         playerHealthComponent = healthComponent;
-    }
-    public void updateHealthBar()
-    {
-        healthBar.value = playerHealthComponent.CurrentHealth / playerHealthComponent.MaxHealth;
-    }
-
+    }  
     // Update is called once per frame
     void Update()
     {
         updateHealthBar();
     }
+
+    public void updateHealthBar()
+    {
+        healthBar.value = playerHealthComponent.CurrentHealth / playerHealthComponent.MaxHealth;
+    }
+
+ 
 }
