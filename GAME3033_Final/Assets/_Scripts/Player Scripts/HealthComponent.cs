@@ -31,7 +31,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (damage <= 0)
+        if (currentHealth <= 0)
         {
             Destroy();
         }

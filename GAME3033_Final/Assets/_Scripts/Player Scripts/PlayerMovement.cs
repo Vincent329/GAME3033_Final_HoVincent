@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         m_velocityVector = (m_moveInput.x * GetCameraRight(playerCamera) + m_moveInput.z * GetCameraForward(playerCamera)) * m_fMoveSpeed * Time.deltaTime;
         //rb.AddForce(m_ForceVector, ForceMode.Impulse);
         rb.MovePosition(rb.position + m_velocityVector * m_fMoveSpeed * Time.deltaTime);
-        m_velocityVector = Vector3.zero;
+        //m_velocityVector = Vector3.zero;
     }
 
     private Vector3 GetCameraForward(Camera pCam)

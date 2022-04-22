@@ -10,7 +10,12 @@ public class PlayerHealthComponent : HealthComponent
         base.Start();
         PlayerEvents.InvokeOnHealthInitialized(this);
     }
-    
+
+    private void Update()
+    {
+        TakeDamage(Time.deltaTime);
+    }
+
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
