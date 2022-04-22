@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button StartGameButton;
     [SerializeField] private Button InstructionsButton;
     [SerializeField] private Button CreditsButton;
+    [SerializeField] private Button QuitButton;
 
     [SerializeField] private GameObject Instructions;
     [SerializeField] private GameObject Credits;
@@ -20,6 +21,7 @@ public class MainMenuController : MonoBehaviour
         StartGameButton.onClick.AddListener(OnStartPressed);
         InstructionsButton.onClick.AddListener(OnInstructionsPressed);
         CreditsButton.onClick.AddListener(OnCreditsPressed);
+        QuitButton.onClick.AddListener(OnQuitPressed);
         toggleCredits = false;
         toggleInstructions = false;
     }
@@ -27,6 +29,10 @@ public class MainMenuController : MonoBehaviour
     private void OnStartPressed()
     {
         SceneLoadManager.Instance.LoadGame();
+    }
+    private void OnQuitPressed()
+    {
+        Application.Quit();
     }
 
     private void OnInstructionsPressed()

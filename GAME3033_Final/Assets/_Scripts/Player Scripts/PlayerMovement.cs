@@ -41,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<AudioClip> audioClips;
     [SerializeField] public List<AudioClip> GetAudioClips => audioClips;
 
+    [Header("Pause Screen")]
+    [SerializeField] private GameObject PausePanel;
+
     // Animator Hashes
     public readonly int movementXHash = Animator.StringToHash("MovementX");
     public readonly int movementZHash = Animator.StringToHash("MovementZ");
@@ -65,14 +68,13 @@ public class PlayerMovement : MonoBehaviour
         isActive = true;
         InitPlayerActions();
         rb.velocity = Vector3.zero;
-        //PausePanel.SetActive(false);
 
         GameManager.Instance.cursorActive = false;
 
         if (!GameManager.Instance.cursorActive)
         {
             pause = false;
-            // PausePanel.SetActive(pause);
+            PausePanel.SetActive(pause);
             AppEvents.InvokeOnPauseEvent(false);
         }
     }
@@ -112,14 +114,11 @@ public class PlayerMovement : MonoBehaviour
         playerInputData.Player.Dash.canceled -= OnDash;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!(m_moveInput.magnitude >= 0)) m_moveInput = Vector2.zero;
-    }
 
     private void FixedUpdate()
     {
+        if (!(m_moveInput.magnitude >= 0)) m_moveInput = Vector2.zero;
+
         isGrounded = CheckGrounded();
         if (isGrounded)
         {
@@ -206,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
     public void PauseButtonFunction()
     {
         pause = !pause;
-       // PausePanel.SetActive(pause);
+        PausePanel.SetActive(pause);
         AppEvents.InvokeOnPauseEvent(pause);
     }
 
