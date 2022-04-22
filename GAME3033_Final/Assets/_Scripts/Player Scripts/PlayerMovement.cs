@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[System.Serializable]
 public class PlayerMovement : MonoBehaviour
 {
     #region -------------- Member Variables ---------------------
@@ -34,8 +35,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isGrounded;
 
     // Audio Source
-   // private AudioSource audioSource;
-   // private List<AudioClip> audioClips;
+    [Header("SFX")]
+    private AudioSource audioSource;
+    public AudioSource GetAudioSource => audioSource;
+    [SerializeField] private List<AudioClip> audioClips;
+    [SerializeField] public List<AudioClip> GetAudioClips => audioClips;
 
     // Animator Hashes
     public readonly int movementXHash = Animator.StringToHash("MovementX");
@@ -53,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         playerAnimController = GetComponent<Animator>();
         isGrounded = false;
         didDash = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -168,7 +173,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            Debug.Log("Jump");
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
 
             rb.AddForce((Vector3.up * m_fVerticalJumpForce), ForceMode.Impulse);
             playerAnimController.SetTrigger(isJumpingHash);
@@ -180,6 +186,8 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded && !didDash && m_moveInput.magnitude >= 0)
         {
             didDash = true;
+            audioSource.clip = audioClips[1];
+            audioSource.Play();
             rb.velocity = Vector3.zero;
             rb.AddForce(m_velocityVector * m_fDashForce + (Vector3.up * 10.0f), ForceMode.Impulse);
         }

@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerHealthComponent : HealthComponent
 {
     // Start is called before the first frame update
+    private PlayerMovement player;
     protected override void Start()
     {
         base.Start();
+        player = GetComponent<PlayerMovement>();
         PlayerEvents.InvokeOnHealthInitialized(this);
     }
 
@@ -21,8 +23,16 @@ public class PlayerHealthComponent : HealthComponent
         base.TakeDamage(damage);
     }
 
+    public override void Heal(float healValue)
+    {
+        base.Heal(healValue);
+        player.GetAudioSource.clip = player.GetAudioClips[2];
+        player.GetAudioSource.Play();
+    }
+
     public override void Destroy()
     {
+        
         Debug.Log("Game Over");
         SceneLoadManager.Instance.LoadLoseScreen();
     }

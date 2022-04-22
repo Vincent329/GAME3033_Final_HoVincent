@@ -2020,6 +2020,9 @@ MonoBehaviour:
   firing: 0
   didDash: 0
   isGrounded: 0
+  audioClips:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4754428710705109345
 MonoBehaviour:
   m_ObjectHideFlags: 0

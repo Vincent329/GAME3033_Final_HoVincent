@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class WeaponScript : MonoBehaviour
 {
     private PlayerMovement playerMovement;
@@ -12,12 +13,21 @@ public class WeaponScript : MonoBehaviour
 
     // muzzle Flash
     [SerializeField] private ParticleSystem particleVFX;
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void FireWeapon(Transform locationToAim)
     {
         if (particleVFX != null)
         {
             particleVFX.Play();
+        }
+        if (audioSource != null)
+        {
+            audioSource.Play();
         }
         Vector3 aimVector = locationToAim.position - spawnLocation.position;
         Vector3 normalizedAimVector = aimVector.normalized;
