@@ -24,5 +24,6 @@ public class PlayerHealthComponent : HealthComponent
     public override void Destroy()
     {
         Debug.Log("Game Over");
+        SceneLoadManager.Instance.LoadLoseScreen();
     }
 }
