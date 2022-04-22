@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d31437265de3fa42afa782bfa2b70fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healValue: 2
+  healValue: 2.25
   rb: {fileID: 0}
   targetFound: 0
   target: {fileID: 0}
-  attractSpeed: 8
+  attractSpeed: 15

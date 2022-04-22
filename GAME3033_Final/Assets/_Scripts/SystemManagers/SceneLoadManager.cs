@@ -22,18 +22,21 @@ public class SceneLoadManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        SceneManager.LoadScene("MainMenu");
 
     }
     public void LoadGame()
     {
-
+        SceneManager.LoadScene("Game");
     }
     public void LoadWinScreen()
     {
+        SceneManager.LoadScene("WinScreen");
 
     }
     public void LoadLoseScreen()
     {
+        SceneManager.LoadScene("LoseScreen");
 
     }
 }
